@@ -1,23 +1,29 @@
 
 import { combineReducers, createStore } from "redux";
-import { products } from "./products";
 import cartReducer, { CART_ADD_ITEM, CART_ITEM_DECREASE_QUANTITY, CART_ITEM_INCREASE_QUANTITY, CART_REMOVE_ITEM } from "./reducers/cartReducer";
 import wishListReducer, { WISHLIST_ADD_ITEM, WISHLIST_REMOVE_ITEM } from "./reducers/wishlistReducer";
 import productsReducer from "./reducers/productsReducer";
+import { myCombineReducers } from "./redux";
 
-const initialState = {
-    products: products,
-    cartItems: [],
-    wishList: []
-}
-
-
-
+// using redux combine reducer method -
 const store = createStore(combineReducers({
     products: productsReducer,
     cartItems: cartReducer,
     wishList: wishListReducer
 }), window.__REDUX_DEVTOOLS_EXTENSION__?.());
+
+// using our own combine reducer method
+// const store = createStore(myCombineReducers({
+//     products: productsReducer,
+//     cartItems: cartReducer,
+//     wishList: wishListReducer
+// }), window.__REDUX_DEVTOOLS_EXTENSION__?.());
+
+myCombineReducers({
+    products: productsReducer,
+    cartItems: cartReducer,
+    wishList: wishListReducer
+})
 
 console.log(store.getState());
 
