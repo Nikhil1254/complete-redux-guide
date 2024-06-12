@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux"
+import { useDispatch } from "../react-redux"
 import { addItemToCart } from "../store/reducers/cartReducer";
 import { addToWishList } from "../store/reducers/wishlistReducer";
 
