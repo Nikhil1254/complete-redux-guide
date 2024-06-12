@@ -1,8 +1,8 @@
 
 import { combineReducers, createStore } from "redux";
-import cartReducer from "./reducers/cartReducer";
-import wishListReducer from "./reducers/wishlistReducer";
-import productsReducer from "./reducers/productsReducer";
+import cartReducer from "./slices/cartSlice";
+import wishListReducer from "./slices/wishlistSlice";
+import productsReducer from "./slices/productsSlice";
 
 // using redux combine reducer method -
 export const store = createStore(combineReducers({
