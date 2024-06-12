@@ -1,3 +1,4 @@
+import { produce } from "immer";
 
 // action types
 export const CART_ADD_ITEM = 'cart/addItem';
@@ -35,32 +36,31 @@ export function removeItemFromCart(productId) {
 }
 
 // reducer 
-export default function cartReducer(state = [], action) {
-    console.log('cart reducer');
-    switch (action.type) {
-        case CART_ADD_ITEM:
-            const existingProduct = state.find(product => product.productId === action.payload.productId);
-            if (existingProduct) {
-                return state.map(product => {
-                    return product.productId === action.payload.productId ? { ...product, quantity: product.quantity + 1 } : product;
-                })
-            }
-            return [...state, { ...action.payload, quantity: 1 }];
-        case CART_REMOVE_ITEM: return state.filter(item => item.productId !== action.payload.productId);
-        case CART_ITEM_INCREASE_QUANTITY:
-            return state.map(item => {
-                return (item.productId == action.payload.productId) ?
-                    { ...item, quantity: item.quantity + 1 }
-                    : item;
-            })
+export default function cartReducer(originalState = [], action) {
+    return produce(originalState, (state) => {
+        const cartItemIndex = state.findIndex(item => item.productId === action.payload.productId);
 
-        case CART_ITEM_DECREASE_QUANTITY:
-            return state.map((cartItem) => {
-                if (cartItem.productId === action.payload.productId)
-                    return { ...cartItem, quantity: cartItem.quantity - 1 };
-                return cartItem;
-            }).filter((cartItem) => cartItem.quantity > 0)
+        switch (action.type) {
+            case CART_ADD_ITEM:
+                if (cartItemIndex !== -1) {
+                    state[cartItemIndex].quantity++;
+                    break;
+                }
+                state.push({ ...action.payload, quantity: 1 });
+                break;
+            case CART_REMOVE_ITEM:
+                if (cartItemIndex !== -1)
+                    state.splice(cartItemIndex, 1);
+                break;
+            case CART_ITEM_INCREASE_QUANTITY:
+                if(cartItemIndex!==-1)
+                    state[cartItemIndex].quantity++;
+                break;
 
-        default: return state;
-    }
+            case CART_ITEM_DECREASE_QUANTITY:
+                if(cartItemIndex !== -1){
+                    (state[cartItemIndex].quantity-- == 1) && state.splice(cartItemIndex,1);
+                }
+        }
+    })
 }
