@@ -3,10 +3,10 @@ export const WISHLIST_ADD_ITEM = 'wishList/addItem';
 export const WISHLIST_REMOVE_ITEM = 'wishList/removeItem';
 
 // action creators -
-export function addToWishList(productId) {
+export function addToWishList(productData) {
     return {
         type: WISHLIST_ADD_ITEM,
-        payload: { productId }
+        payload: productData
     }
 }
 
@@ -19,11 +19,13 @@ export function removeFromWishList(productId) {
 
 // reducer
 export default function wishListReducer(state = [], action) {
-    console.log('wishlist reducer');
     switch (action.type) {
         case WISHLIST_ADD_ITEM:
-            return [...state, action.payload.productId];
-        case WISHLIST_REMOVE_ITEM: return state.filter(wishListItem => wishListItem !== action.payload.productId);
+            const existingItem = state.find(product => product.productId === action.payload.productId)
+            if (existingItem)
+                return state;
+            return [...state, action.payload];
+        case WISHLIST_REMOVE_ITEM: return state.filter(product => product.productId !== action.payload.productId);
         default: return state;
     }
 }
