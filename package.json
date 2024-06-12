@@ -44,6 +44,7 @@
     "has-flag": "^4.0.0",
     "htmlnano": "^2.1.1",
     "htmlparser2": "^7.2.0",
+    "immer": "^10.1.1",
     "import-fresh": "^3.3.0",
     "is-arrayish": "^0.2.1",
     "is-extglob": "^2.1.1",

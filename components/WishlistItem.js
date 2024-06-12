@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from '../react-redux'
-import { removeFromWishList } from '../store/reducers/wishlistReducer';
+import { removeFromWishList } from '../store/slices/wishlistSlice';
 
 function WishlistItem({productId, title, imageUrl, rating, price}) {
     const dispatch = useDispatch();
