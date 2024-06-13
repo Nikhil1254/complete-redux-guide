@@ -1,9 +1,9 @@
-import { myCreateSlice } from "../../redux-toolkit";
+import { createSlice } from "../../redux-toolkit";
 
 const getItemIndex = (state, action) => (state.findIndex(item => item.productId === action.payload.productId))
 
 
-const mySlice = myCreateSlice({
+const mySlice = createSlice({
     name: 'wishlist',
     initialState: [],
     reducers: {

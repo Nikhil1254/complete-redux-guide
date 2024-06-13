@@ -1,10 +1,10 @@
-import { myCreateSlice } from "../../redux-toolkit";
+import {  createSlice } from "../../redux-toolkit";
 
 function getItemIndex(state, action) {
     return state.findIndex(item => item.productId === action.payload.productId);
 }
 
-const mySlice = myCreateSlice({
+const mySlice = createSlice({
     name: 'cart',
     initialState: [],
     reducers: {

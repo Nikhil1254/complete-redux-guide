@@ -3,7 +3,7 @@ import { produce } from "immer";
  * 
  * @param config - {name,initialState, reducers : {}} 
  */
-export function myCreateSlice(config) {
+export function createSlice(config) {
     const { name, initialState, reducers } = config;
     const actions = {};
 
