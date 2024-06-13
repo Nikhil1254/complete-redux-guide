@@ -1,9 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { myCreateSlice } from "../../redux-toolkit";
 
 const getItemIndex = (state, action) => (state.findIndex(item => item.productId === action.payload.productId))
 
 
-const slice = createSlice({
+const mySlice = myCreateSlice({
     name: 'wishlist',
     initialState: [],
     reducers: {
@@ -23,5 +23,5 @@ const slice = createSlice({
 })
 
 
-export const { addToWishList, removeFromWishList } = slice.actions;
-export default slice.reducer;
+export const { addToWishList, removeFromWishList } = mySlice.actions;
+export default mySlice.reducer;

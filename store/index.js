@@ -5,6 +5,7 @@ import productsReducer from "./slices/productsSlice";
 import { configureStore } from "@reduxjs/toolkit";
 
 
+
 // using redux combine reducer method -
 // export const store = createStore(combineReducers({
 //     products: productsReducer,

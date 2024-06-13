@@ -1,10 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { myCreateSlice } from "../../redux-toolkit";
 
 function getItemIndex(state, action) {
     return state.findIndex(item => item.productId === action.payload.productId);
 }
 
-const slice = createSlice({
+const mySlice = myCreateSlice({
     name: 'cart',
     initialState: [],
     reducers: {
@@ -32,7 +32,9 @@ const slice = createSlice({
             }
         }
     }
-})
+});
 
-export const { addItem, removeItem, increaseQuantity, decreaseQuantity } = slice.actions;
-export default slice.reducer;
+console.log(mySlice);
+
+export const { addItem, removeItem, increaseQuantity, decreaseQuantity } = mySlice.actions;
+export default mySlice.reducer;
