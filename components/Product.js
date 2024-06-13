@@ -1,5 +1,5 @@
 import { useDispatch } from "../react-redux"
-import { addItemToCart } from "../store/slices/cartSlice";
+import { addItem } from "../store/slices/cartSlice";
 import { addToWishList } from "../store/slices/wishlistSlice";
 
 export default function Product({ productId, title, rating, price, imageUrl }) {
@@ -21,7 +21,7 @@ export default function Product({ productId, title, rating, price, imageUrl }) {
                 <p className="price">${price}</p>
             </div>
             <div className="cta-container">
-                <button onClick={() => dispatch(addItemToCart({ productId, title, rating, price, imageUrl }))}>Add to Cart</button>
+                <button onClick={() => dispatch(addItem({ productId, title, rating, price, imageUrl }))}>Add to Cart</button>
                 <button onClick={()=>dispatch(addToWishList({ productId, title, rating, price, imageUrl }))}>Add To WishList</button>
             </div>
         </div>

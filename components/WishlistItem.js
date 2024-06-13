@@ -1,4 +1,3 @@
-import React from 'react'
 import { useDispatch } from '../react-redux'
 import { removeFromWishList } from '../store/slices/wishlistSlice';
 
@@ -16,7 +15,7 @@ function WishlistItem({productId, title, imageUrl, rating, price}) {
             </div>
             <div className="item-price">${price.toFixed(2)}</div>
             <div className="item-price">★ {rating}</div>
-            <div className="item-price"><button onClick={()=>dispatch(removeFromWishList(productId))}>Remove</button></div>
+            <div className="item-price"><button onClick={()=>dispatch(removeFromWishList({productId}))}>Remove</button></div>
         </div>
     )
 }
