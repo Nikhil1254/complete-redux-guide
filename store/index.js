@@ -14,6 +14,10 @@ import { configureStore } from "@reduxjs/toolkit";
 // }), window.__REDUX_DEVTOOLS_EXTENSION__?.());
 
 // using configureStore method -
+/**
+ * 1. I can directly pass object it will combine automatically internally
+ * 2. Or we can first combine using combineReducer and then pass that reducer in reducer field.
+ */
 export const store = configureStore({reducer : {
     products : productsReducer,
     cartItems : cartReducer,
