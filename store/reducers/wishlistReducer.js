@@ -22,8 +22,10 @@ export default function wishListReducer(state = [], action) {
     switch (action.type) {
         case WISHLIST_ADD_ITEM:
             const existingItem = state.find(product => product.productId === action.payload.productId)
-            if (existingItem)
+            if (existingItem){
+                alert("Item already exist in wishlist!");
                 return state;
+            }
             return [...state, action.payload];
         case WISHLIST_REMOVE_ITEM: return state.filter(product => product.productId !== action.payload.productId);
         default: return state;
