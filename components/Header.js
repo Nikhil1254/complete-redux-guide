@@ -4,21 +4,43 @@ import CartIcon from '../assets/cart-icon.svg'
 import HeartIcon from '../assets/heart-icon.svg';
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts, fetchProductsError, updateAllProducts } from '../store/slices/productsSlice';
+import { fetchCartItems, fetchCartItemsError, updateAllCartItems } from '../store/slices/cartSlice';
+
+async function fetchProductsAndCartItems(dispatch) {
+  // fetching products data -
+  try {
+    dispatch(fetchProducts()); // will set loading = true
+    const products = await fetch('https://fakestoreapi.com/products').then(res => res.json());
+    dispatch(updateAllProducts(products));
+  } catch (err) {
+    dispatch(fetchProductsError("Something went wrong !"))
+  }
+
+  // fetching carts data - 
+  try {
+    dispatch(fetchCartItems()); // will set loading = true
+    const { products } = await fetch("https://fakestoreapi.com/carts/3").then(res => res.json());
+    dispatch(updateAllCartItems(products));
+  } catch (err) {
+    dispatch(fetchCartItemsError('Something went wrong !'));
+  }
+}
 
 export default function Header() {
-  const cartItems = useSelector(state => state.cartItems);
+  const cartItems = useSelector(state => state.cartItems.list);
   const wishlistItems = useSelector(state => state.wishList);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchProducts());
-    fetch('https://fakestoreapi.com/products')
-      .then(res => res.json())
-      .then(products => {
-        dispatch(updateAllProducts(products));
-      }).catch(err => {
-        dispatch(fetchProductsError('Something went wrong !'));
-      })
+    // dispatch(fetchProducts());
+    // fetch('https://fakestoreapi.com/products')
+    //   .then(res => res.json())
+    //   .then(products => {
+    //     dispatch(updateAllProducts(products));
+    //   }).catch(err => {
+    //     dispatch(fetchProductsError('Something went wrong !'));
+    //   })
+    fetchProductsAndCartItems(dispatch).catch();
   }, [])
 
   return (

@@ -8,7 +8,7 @@ export default function Home() {
   if (loading)
     return <h3 style={{ textAlign: 'center' }}>Fetching products data...</h3>;
 
-  if (error)
+  if (error !== '')
     return <h3 style={{ textAlign: 'center' }}>{error}</h3>;
 
   return (

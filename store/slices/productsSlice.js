@@ -11,9 +11,9 @@ const slice = createSlice({
         fetchProducts(state) {
             state.loading = true;
         },
-        fetchProductsError(state, payload) {
+        fetchProductsError(state, action) {
             state.loading = false;
-            state.error = payload.message;
+            state.error = action.payload;
         },
         updateAllProducts(state, action) {
             /**
