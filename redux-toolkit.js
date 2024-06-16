@@ -13,6 +13,11 @@ export function createSlice(config) {
         }
     })
 
+    /**
+     * 1. depending on the action type we are calling corresponding function
+     * 2. Instead of switch cases we are calling the corresponding function by passing proxy state and action.
+     * 3. That method will mutate this proxy object and produce will return that proxy.
+     */
     function reducer(originalState = initialState, action) {
         return produce(originalState, (state) => {
             const caseReducer = reducers[action.type.split('/')[1]]
