@@ -1,9 +1,9 @@
 import React from 'react'
-import { useSelector } from '../react-redux';
+import { useSelector } from 'react-redux';
 import WishlistItem from '../components/WishlistItem';
 
 function Wishlist() {
-    const wishlistItems = useSelector(state=>state.wishList);
+  const wishlistItems = useSelector(state => state.wishList);
 
   return (
     <div className="cart-container">

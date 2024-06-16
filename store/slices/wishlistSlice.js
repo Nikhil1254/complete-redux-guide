@@ -1,4 +1,4 @@
-import { createSlice } from "../../redux-toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const getItemIndex = (state, action) => (state.findIndex(item => item.productId === action.payload.productId))
 

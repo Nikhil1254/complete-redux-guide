@@ -1,4 +1,4 @@
-import { useDispatch } from '../react-redux'
+import { useDispatch } from 'react-redux'
 import { removeFromWishList } from '../store/slices/wishlistSlice';
 
 function WishlistItem({productId, title, imageUrl, rating, price}) {

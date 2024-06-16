@@ -1,3 +1,2 @@
-1. Will understand what middlewares are
-2. created our own middleware 
-3. how to use it with configureStore
+1. updated productsSlice to set products
+2. fetched products data in header component and set it in store
