@@ -27,6 +27,10 @@ export function Provider({ store, children }) {
     </globalContext.Provider>
 }
 
+/**
+ * 1. we are creating custom hooks here. Hooks are normal functions only but they should start with 'use' word.
+ * 2. In normal functions we can use react hooks like useState, useEffect or useContext. That's the main difference between normal functions and custom hooks.
+ */
 export function useDispatch() {
     const { dispatch } = useContext(globalContext);
     return dispatch;
