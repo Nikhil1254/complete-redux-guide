@@ -6,30 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts, fetchProductsError, updateAllProducts } from '../store/slices/productsSlice';
 import { fetchCartItems, fetchCartItemsError, updateAllCartItems } from '../store/slices/cartSlice';
 
-async function fetchProductsAndCartItems(dispatch) {
-  // fetching products data -
-  /**
-   * 1.we want to fetch cart items only after products are being fetched
-   * 2. as we are looping over products for cartItems logic we might get error if 
-   *  products are not loaded first.
-   */
-  try {
-    dispatch(fetchProducts()); // will set loading = true
-    const products = await fetch('https://fakestoreapi.com/products').then(res => res.json());
-    dispatch(updateAllProducts(products));
-  } catch (err) {
-    dispatch(fetchProductsError("Something went wrong !"))
-  }
 
-  // fetching carts data - 
-  try {
-    dispatch(fetchCartItems()); // will set loading = true
-    const { products } = await fetch("https://fakestoreapi.com/carts/3").then(res => res.json());
-    dispatch(updateAllCartItems(products));
-  } catch (err) {
-    dispatch(fetchCartItemsError('Something went wrong !'));
-  }
-}
 
 export default function Header() {
   const cartItems = useSelector(state => state.cartItems.list);
@@ -37,15 +14,27 @@ export default function Header() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(fetchProducts());
-    // fetch('https://fakestoreapi.com/products')
-    //   .then(res => res.json())
-    //   .then(products => {
-    //     dispatch(updateAllProducts(products));
-    //   }).catch(err => {
-    //     dispatch(fetchProductsError('Something went wrong !'));
-    //   })
-    fetchProductsAndCartItems(dispatch).catch();
+    // fetching products
+    dispatch({
+      type: 'api/fetchProducts',
+      payload: {
+        url: 'products',
+        onStart: fetchProducts.type, // it will return us action type from the action creator
+        onSuccess: updateAllProducts.type,
+        onFailure: fetchProductsError.type
+      }
+    })
+
+    // fetching cart items
+    dispatch({
+      type: 'api/fetchCartItems',
+      payload: {
+        url: 'carts/3',
+        onStart: fetchCartItems.type,
+        onSuccess: updateAllCartItems.type,
+        onFailure: fetchCartItemsError.type
+      }
+    })
   }, [])
 
   return (

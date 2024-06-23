@@ -15,7 +15,7 @@ export default function Cart() {
     return <h3 style={{ textAlign: 'center' }}>{error}</h3>;
 
 
-  if (cartItems.length > 0)
+  if (cartItems.length >= 0)
     return (
       <div className="cart-container">
         <h2>Items in Your Cart</h2>
