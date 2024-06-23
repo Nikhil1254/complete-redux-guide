@@ -8,6 +8,11 @@ import { fetchCartItems, fetchCartItemsError, updateAllCartItems } from '../stor
 
 async function fetchProductsAndCartItems(dispatch) {
   // fetching products data -
+  /**
+   * 1.we want to fetch cart items only after products are being fetched
+   * 2. as we are looping over products for cartItems logic we might get error if 
+   *  products are not loaded first.
+   */
   try {
     dispatch(fetchProducts()); // will set loading = true
     const products = await fetch('https://fakestoreapi.com/products').then(res => res.json());

@@ -1,15 +1,12 @@
 import React from 'react'
 import CartItem from '../components/CartItem'
 import { useSelector } from 'react-redux';
+import { selectCartItems, selectCartItemsError, selectCartItemsLoading } from '../store/slices/cartSlice';
 
 export default function Cart() {
-  const cartItems = useSelector((state) => {
-    return state.cartItems.list.map((cartItem) => {
-      const product = state.products.list.find(product => product.id === cartItem.productId)
-      return { ...product, quantity: cartItem.quantity }
-    })
-  });
-  const { loading, error } = useSelector(state => state.cartItems);
+  const cartItems = useSelector(selectCartItems);
+  const loading = useSelector(selectCartItemsLoading);
+  const error = useSelector(selectCartItemsError);
 
   if (loading)
     return <h3 style={{ textAlign: 'center' }}>Fetching Cart Items !</h3>;

@@ -1,9 +1,12 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import Product from '../components/Product'
+import { selectProducts, selectProductsError, selectProductsLoading } from '../store/slices/productsSlice';
 
 export default function Home() {
-  const { list: productsList, loading, error } = useSelector((state) => state.products)
+  const productsList = useSelector(selectProducts)
+  const loading = useSelector(selectProductsLoading);
+  const error = useSelector(selectProductsError);
 
   if (loading)
     return <h3 style={{ textAlign: 'center' }}>Fetching products data...</h3>;
