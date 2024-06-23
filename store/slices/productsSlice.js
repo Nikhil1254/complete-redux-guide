@@ -28,11 +28,23 @@ const slice = createSlice({
     }
 });
 
+// fetch products data
+export const fetchProductsData = () => (async (dispatch) => {
+    try {
+        dispatch(fetchProducts()); // will set loading = true
+        const products = await fetch('https://fakestoreapi.com/products').then(res => res.json());
+        dispatch(updateAllProducts(products));
+    } catch (err) {
+        dispatch(fetchProductsError("Something went wrong !"))
+    }
+})
+
 // selectors
-export const selectProducts = (state)=>state.products.list;
-export const selectProductsLoading = (state)=>state.products.loading;
-export const selectProductsError = (state)=>state.products.error;
+export const selectProducts = (state) => state.products.list;
+export const selectProductsLoading = (state) => state.products.loading;
+export const selectProductsError = (state) => state.products.error;
 
 
 export const { updateAllProducts, fetchProducts, fetchProductsError } = slice.actions;
 export default slice.reducer;
+

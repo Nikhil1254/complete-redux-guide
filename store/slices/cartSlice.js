@@ -50,6 +50,17 @@ const mySlice = createSlice({
     }
 });
 
+// fetching cart items
+export const fetchCartItemsData = () => (async(dispatch) => {
+    try {
+        dispatch(fetchCartItems()); // will set loading = true
+        const { products } = await fetch("https://fakestoreapi.com/carts/3").then(res => res.json());
+        dispatch(updateAllCartItems(products));
+    } catch (err) {
+        dispatch(fetchCartItemsError('Something went wrong !'));
+    }
+})
+
 // selectors - 
 /**
  * 

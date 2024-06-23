@@ -4,6 +4,7 @@ import wishListReducer from "./slices/wishlistSlice";
 import productsReducer from "./slices/productsSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import apiMiddleware from './middlewares/api';
+import { fetchDataMiddleware } from "./middlewares/fetchData";
 
 
 // using configureStore method -
@@ -16,7 +17,7 @@ export const store = configureStore({
         cartItems: cartReducer,
         wishList: wishListReducer
     },
-    middleware: (defaultMiddleware) => [...defaultMiddleware(), apiMiddleware],
+    middleware: (defaultMiddleware) => [...defaultMiddleware(), fetchDataMiddleware],
 });
 
 

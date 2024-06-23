@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import CartIcon from '../assets/cart-icon.svg'
 import HeartIcon from '../assets/heart-icon.svg';
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchProducts, fetchProductsError, updateAllProducts } from '../store/slices/productsSlice';
-import { fetchCartItems, fetchCartItemsError, updateAllCartItems } from '../store/slices/cartSlice';
+import { fetchProducts, fetchProductsData, fetchProductsError, updateAllProducts } from '../store/slices/productsSlice';
+import { fetchCartItems, fetchCartItemsData, fetchCartItemsError, updateAllCartItems } from '../store/slices/cartSlice';
 
 
 
@@ -15,26 +15,9 @@ export default function Header() {
 
   useEffect(() => {
     // fetching products
-    dispatch({
-      type: 'api/fetchProducts',
-      payload: {
-        url: 'products',
-        onStart: fetchProducts.type, // it will return us action type from the action creator
-        onSuccess: updateAllProducts.type,
-        onFailure: fetchProductsError.type
-      }
-    })
-
+    dispatch(fetchProductsData());
     // fetching cart items
-    dispatch({
-      type: 'api/fetchCartItems',
-      payload: {
-        url: 'carts/3',
-        onStart: fetchCartItems.type,
-        onSuccess: updateAllCartItems.type,
-        onFailure: fetchCartItemsError.type
-      }
-    })
+    dispatch(fetchCartItemsData());
   }, [])
 
   return (
